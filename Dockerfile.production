@@ -1,0 +1,15 @@
+FROM node:7
+# Copy the application files
+WORKDIR /usr/src/app
+COPY package.json index.js LICENSE /usr/src/app/
+LABEL license=MIT \
+      version=$VERSION
+# Set required environment variables
+ENV NODE_ENV production
+# Download the required packages for production
+RUN npm install
+# Make the application run when running the container
+CMD ["node", "app.js"]
+
+# build with
+# docker build -t node-docker -f Dockerfile.production .
